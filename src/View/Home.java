@@ -129,6 +129,11 @@ public class Home extends javax.swing.JFrame {
         jLabel4.setText("Pesquisar:");
 
         jButton4.setText("Editar Selecionado");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -293,13 +298,22 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void BtnNewCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewCliActionPerformed
-        
+        JFrame n = new NovoUsuario(0); 
+        n.setVisible(true);
+        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_BtnNewCliActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         JFrame n = new NovoExemplar(); 
         n.setVisible(true);
+        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JFrame n = new NovoUsuario(1); 
+        n.setVisible(true);
+        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

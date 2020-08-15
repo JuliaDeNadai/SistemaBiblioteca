@@ -6,14 +6,12 @@ public class Usuario {
 	protected int cod;
 	protected String nome;
         protected String cpf;
-        LinkedList<Emprestimo> emprestimos;
         Endereco end;
         Contato contato;
 
-        public Usuario(String nome, String cpf, LinkedList<Emprestimo> emprestimos, Endereco end, Contato contato) {
+        public Usuario(String nome, String cpf, Endereco end, Contato contato) {
             this.nome = nome;
             this.cpf = cpf;
-            this.emprestimos = new LinkedList<Emprestimo>();
             this.end = end;
             this.contato = contato;
         }

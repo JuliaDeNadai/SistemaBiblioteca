@@ -27,7 +27,7 @@ public class Login extends javax.swing.JFrame {
             if(user.isEmpty() || passwrd.isEmpty() ) throw new Exception("Campos vazios");
             
             if(user.equals("admin") && passwrd.equals("admin")){
-                JOptionPane.showMessageDialog(null, user+passwrd);
+                
                 Home home = new Home();
                 home.setVisible(true);
                 dispose();
