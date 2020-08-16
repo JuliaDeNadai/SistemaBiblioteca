@@ -17,8 +17,20 @@ public class NovoExemplar extends javax.swing.JFrame {
     /**
      * Creates new form NovoExemplar
      */
-    public NovoExemplar() {
+    public NovoExemplar(int acao) {
         initComponents();
+        //acao = 0: adicionar
+        //acao = 1: alterar
+        
+        if(acao == 1){
+            btnNovoExemplar.setVisible(false);
+            btnAlterar.setVisible(true);
+            tituloLabel.setText("Alterar Exemplar");
+        }else{
+            btnNovoExemplar.setVisible(true);
+            btnAlterar.setVisible(false);
+            tituloLabel.setText("Novo Exemplar");
+        }
     }
     
     public boolean verificaString(String str){
@@ -35,7 +47,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         return true;
     }
     
-    public void CadastrarExemplar(){
+    public void cadastrarExemplar(){
         
         try{
             Exemplar ex;
@@ -94,6 +106,10 @@ public class NovoExemplar extends javax.swing.JFrame {
             campoDepartamento.setEnabled(true);
         }
     }
+    
+    public void alterarExemplar(){
+        
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -123,10 +139,11 @@ public class NovoExemplar extends javax.swing.JFrame {
         campoDepartamento = new javax.swing.JTextField();
         campoInstituicao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        btnNovoExemplar = new javax.swing.JButton();
+        tituloLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         campoQntd = new javax.swing.JTextField();
+        btnAlterar = new javax.swing.JButton();
+        btnNovoExemplar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -173,8 +190,17 @@ public class NovoExemplar extends javax.swing.JFrame {
 
         jLabel8.setText("Instituição:");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel9.setText("Novo Exemplar");
+        tituloLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        tituloLabel.setText("Novo Exemplar");
+
+        jLabel10.setText("Qntd:");
+
+        btnAlterar.setText("ALTERAR");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnNovoExemplar.setText("CADASTRAR");
         btnNovoExemplar.addActionListener(new java.awt.event.ActionListener() {
@@ -183,8 +209,6 @@ public class NovoExemplar extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Qntd:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,11 +216,6 @@ public class NovoExemplar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(28, 28, 28)
-                        .addComponent(campoInstituicao, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -222,35 +241,40 @@ public class NovoExemplar extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(campoQntd, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addGap(48, 48, 48)
                                 .addComponent(campoEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(campoAno, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(campoAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel9)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(campoDepartamento)
-                                            .addGap(1, 1, 1)))
-                                    .addComponent(btnNovoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel8)
+                                .addGap(28, 28, 28)
+                                .addComponent(campoInstituicao, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(30, 30, 30))))
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(campoAno, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campoAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tituloLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campoDepartamento))
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnNovoExemplar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel9)
+                .addComponent(tituloLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,9 +310,11 @@ public class NovoExemplar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(btnNovoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(btnAlterar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNovoExemplar)
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -297,10 +323,6 @@ public class NovoExemplar extends javax.swing.JFrame {
     private void tipoLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoLivroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoLivroActionPerformed
-
-    private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
-        CadastrarExemplar();
-    }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void tipoLivroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipoLivroItemStateChanged
         if(tipoLivro.isSelected()){
@@ -321,6 +343,14 @@ public class NovoExemplar extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         alteraCampos(1);
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
+        cadastrarExemplar();
+    }//GEN-LAST:event_btnNovoExemplarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        alterarExemplar();
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,7 +382,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NovoExemplar().setVisible(true);
+                //new NovoExemplar().setVisible(true);
                 
             }
         });
@@ -363,6 +393,7 @@ public class NovoExemplar extends javax.swing.JFrame {
     
     private javax.swing.ButtonGroup tipoGroup;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnNovoExemplar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -387,8 +418,8 @@ public class NovoExemplar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton tipoArtigo;
     private javax.swing.JRadioButton tipoLivro;
+    private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
 }
