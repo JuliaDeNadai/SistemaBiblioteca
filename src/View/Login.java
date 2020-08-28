@@ -5,6 +5,7 @@
  */
 package View;
 
+import java.awt.Frame;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -87,6 +88,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         invalidLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -138,6 +140,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("Biblioteca");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -179,6 +183,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+                
             }
         });
     }

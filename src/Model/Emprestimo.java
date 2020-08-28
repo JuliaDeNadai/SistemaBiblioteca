@@ -5,20 +5,23 @@ import java.util.*;
 
 public class Emprestimo {
 	private int cod;
+        private String codCliente;
 	private String dataEmprestimo;
 	private String dataDevolucao;
+        private float multa; 
 	private LinkedList<Exemplar> exemplares;
-	private Cliente cliente;
 	Date data = new Date();
 	SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
 		
+	public Emprestimo(String p_codCliente, LinkedList<Exemplar> p_exemplares){
+            this.codCliente = p_codCliente;
+            this.exemplares = p_exemplares; 
+            this.multa = 0;
+            //dataEmprestimo = pegar data atual computador
+            //dataDevolucao = dataEmprestimo + 7
+        }
 	
-	
-	public void setExemplares(LinkedList<Exemplar> exemplares){
-		this.exemplares = exemplares;
-	}
-	
-	public void realizarEmprestimo(){
+	public void realizarEmprestimo(LinkedList<Exemplar> exemplares){
 		
 		for(Exemplar ale: exemplares){
 			//ale.emprestado();
@@ -31,8 +34,6 @@ public class Emprestimo {
 		}
 	}
 
-	//--------------------gets e sets----------------------------------------------------
-	
 	public String getDataEmprestimo() {
 		formatador.format( data );
 		String result = data.toString();
@@ -60,5 +61,20 @@ public class Emprestimo {
 	public int getCod() {
 		return cod;
 	}
-	
+        
+        public void setMulta(float p_multa) {
+		this.multa = p_multa;
+	}
+        
+        public float getMulta() {
+		return multa;
+	}
+
+        public String getCodCliente() {
+            return codCliente;
+        }
+
+        public void setCodCliente(String codCliente) {
+            this.codCliente = codCliente;
+        }
 }

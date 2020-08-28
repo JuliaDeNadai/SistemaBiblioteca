@@ -190,6 +190,11 @@ public class Home extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tabelaExemplar);
 
         jButton6.setText("Editar Selecionado");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Remover Selecionado");
 
@@ -304,7 +309,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnNewCliActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        JFrame n = new NovoExemplar(); 
+        JFrame n = new NovoExemplar(0); 
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -314,6 +319,12 @@ public class Home extends javax.swing.JFrame {
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFrame n = new NovoExemplar(1); 
+        n.setVisible(true);
+        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
