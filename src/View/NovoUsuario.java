@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.UsuarioController;
 import Model.Administrador;
 import Model.Contato;
 import Model.Endereco;
@@ -20,20 +21,41 @@ public class NovoUsuario extends javax.swing.JFrame {
     /**
      * Creates new form NovoUsuario
      */
-    public NovoUsuario(int acao) {
+    UsuarioController controleUser;
+    
+    /**
+     *
+     * @param user
+     */
+   
+    
+    public NovoUsuario() {
         initComponents();
-        //acao = 0: adicionar
-        //acao = 1: alterar
         
-        if(acao == 1){
-            btnNovoUsuario.setVisible(false);
-            btnAltera.setVisible(true);
-            tituloLabel.setText("Alterar Usuário");
-        }else{
-            btnNovoUsuario.setVisible(true);
-            btnAltera.setVisible(false);
-            tituloLabel.setText("Novo Usuário");
-        }
+        btnNovoUsuario.setVisible(true);
+        btnAltera.setVisible(false);
+        tituloLabel.setText("Novo Usuário");
+        
+        controleUser = new UsuarioController();
+        
+    }
+    
+    public NovoUsuario(int cod) {
+        initComponents();
+        
+        btnNovoUsuario.setVisible(false);
+        btnAltera.setVisible(true);
+        tituloLabel.setText("Alterar Usuário");
+        
+        
+        controleUser = new UsuarioController();
+        //ver como ficaria esse retorno com banco de dados
+        Usuario user = controleUser.buscarUsuario(cod);
+        preencheCampos(user);
+        
+    }
+    public void preencheCampos(Usuario user){
+        //implementar depois da resposta
     }
     
     public Usuario verificacoes(){
@@ -152,12 +174,12 @@ public class NovoUsuario extends javax.swing.JFrame {
     
     public void cadastrarUsuario(){
         Usuario user = verificacoes();
-        //chama controler
+        controleUser.adicionaUsuario(user);
     }
     
     public void alterarUsuario(){
         Usuario user = verificacoes();
-        //chama controller
+        controleUser.alteraUsuario(user);
     }
     /**
      * This method is called from within the constructor to initialize the form.

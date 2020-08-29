@@ -10,8 +10,8 @@ public class Emprestimo {
 	private String dataDevolucao;
         private float multa; 
 	private LinkedList<Exemplar> exemplares;
-	Date data = new Date();
-	SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+	Date data = new Date();//tirar
+	SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");//tirar
 		
 	public Emprestimo(String p_codCliente, LinkedList<Exemplar> p_exemplares){
             this.codCliente = p_codCliente;

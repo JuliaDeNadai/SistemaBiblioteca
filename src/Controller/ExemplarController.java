@@ -16,30 +16,30 @@ import javax.swing.table.*;
  */
 public class ExemplarController {
     //private List<Exemplar> exemplares;
-    private HashMap<Exemplar, Integer> exemplares;
+    
     private DefaultTableModel dados;
-    private int cont = 0;
+    private int cont = 0;//??
     
     public ExemplarController(){
-	exemplares = new HashMap<Exemplar, Integer>();
     }
     
-    private void adicionaExemplar(Exemplar ex){
-        if(!exemplares.containsKey(ex.getTitulo())){   
-            exemplares.put(ex,1);
-        }else{
-            Integer a = exemplares.get(ex.getTitulo());
-            exemplares.put(ex, (a+1));
-        }        
+    public void adicionaExemplar(Exemplar ex){
+            //integrar com banco de dados   
     }
     
-    private void removeExemplar(Exemplar ex){}
-    
-    private HashMap<Exemplar, Integer> getExemplares(){
-        return exemplares;
+    public void removeExemplar(int cod){
+            //integrar com banco de dados
     }
     
-    public void preencheTabelaExemplares(JTable tabela){
+    public void alteraExemplar(Exemplar ex){
+        //integrar com banco de dados
+    }
+    
+    public Exemplar buscarExemplar(int cod){
+        return null;
+    }
+    
+    public void preencheTabelaExemplares(JTable tabela, int op){
         dados = new DefaultTableModel();
         dados.setNumRows(0);
         dados.addColumn("Tipo");
@@ -52,9 +52,21 @@ public class ExemplarController {
         dados.addColumn("Departamento");
         dados.addColumn("Qntd");
         
-        for (Map.Entry<Exemplar, Integer> e : exemplares.entrySet()) 
+        switch(op){
+            case 0:
+                //integrar com banco de dados
+                break;
+            case 1:
+                //integrar com banco de dados
+                break;
+            default:
+                //integrar com banco de dados
+        }
+        
+        //integrar com banco de dados
+        /*for () 
             dados.addRow(new Object[]{e.getKey().getTipo(), e.getKey().getTitulo(), e.getKey().getAutor(), e.getKey().getAno(),e.getValue()});
-                    
+        */            
         tabela.setModel(dados);
     }
 }

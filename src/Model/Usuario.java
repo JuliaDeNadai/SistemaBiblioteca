@@ -6,12 +6,14 @@ public class Usuario {
 	protected int cod;
 	protected String nome;
         protected String cpf;
+        protected String tipo;
         Endereco end;
         Contato contato;
 
-        public Usuario(String nome, String cpf, Endereco end, Contato contato) {
+        public Usuario(String nome, String cpf, String tipo, Endereco end, Contato contato) {
             this.nome = nome;
             this.cpf = cpf;
+            this.tipo = tipo;
             this.end = end;
             this.contato = contato;
         }
@@ -35,4 +37,13 @@ public class Usuario {
 	public void setCPF(String p_cpf) {
 		this.cpf = p_cpf;
 	}
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String p_tipo) {
+            this.tipo = p_tipo;
+        }
+        
 }
