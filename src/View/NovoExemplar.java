@@ -26,7 +26,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         btnNovoExemplar.setVisible(true);
         btnAlterar.setVisible(false);
         tituloLabel.setText("Novo Exemplar");
-        
+        setCamposEditable(true);
     }
     
     public NovoExemplar(int cod) {
@@ -35,6 +35,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         btnNovoExemplar.setVisible(false);
         btnAlterar.setVisible(true);
         tituloLabel.setText("Alterar Exemplar");
+        setCamposEditable(true);
         
         controleExemplar = new ExemplarController();
         //ver como ficaria esse retorno com banco de dados
@@ -43,6 +44,31 @@ public class NovoExemplar extends javax.swing.JFrame {
         
     }
     
+    public NovoExemplar(int cod,int n) {
+        initComponents();
+        
+        btnNovoExemplar.setVisible(false);
+        btnAlterar.setVisible(true);
+        tituloLabel.setText("Alterar Exemplar");
+        setCamposEditable(false);
+        
+        
+        controleExemplar = new ExemplarController();
+        //ver como ficaria esse retorno com banco de dados
+        Exemplar ex = controleExemplar.buscarExemplar(cod);
+        preencheCampos(ex);
+        
+    }
+    
+    public final void setCamposEditable(boolean bol){
+        campoTitulo.setEditable(bol);
+        campoAutor.setEditable(bol);
+        campoTitulo.setEditable(bol);
+        campoAutor.setEditable(bol);
+        campoAno.setEditable(bol);
+        campoQntd.setEditable(bol);
+        //buttonGroup1.getSelection().
+    }
     
     public Exemplar verificacoes(){
         try{

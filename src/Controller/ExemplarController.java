@@ -24,11 +24,11 @@ public class ExemplarController {
     }
     
     public void adicionaExemplar(Exemplar ex){
-            //integrar com banco de dados   
+        //integrar com banco de dados   
     }
     
     public void removeExemplar(int cod){
-            //integrar com banco de dados
+        //integrar com banco de dados
     }
     
     public void alteraExemplar(Exemplar ex){
@@ -39,7 +39,44 @@ public class ExemplarController {
         return null;
     }
     
+    public void preencheTabelaExemplaresVazia(JTable tabela){
+        dados = new DefaultTableModel();
+        dados.setNumRows(0);
+        dados.addColumn("Tipo");
+        dados.addColumn("Título");
+        dados.addColumn("Autor");
+        dados.addColumn("Ano");
+        dados.addColumn("Editora");
+        dados.addColumn("Edição");
+        dados.addColumn("Instituição");
+        dados.addColumn("Departamento");
+        dados.addColumn("Qntd");
+                    
+        tabela.setModel(dados);
+    }
+    
+    public void preencheTabelaExemplares(JTable tabela){
+        dados = new DefaultTableModel();
+        dados.setNumRows(0);
+        dados.addColumn("Tipo");
+        dados.addColumn("Título");
+        dados.addColumn("Autor");
+        dados.addColumn("Ano");
+        dados.addColumn("Editora");
+        dados.addColumn("Edição");
+        dados.addColumn("Instituição");
+        dados.addColumn("Departamento");
+        dados.addColumn("Qntd");
+        
+        //integrar com banco de dados
+        for (int i =0; i<2; i++){
+            dados.addRow(new Object[]{"adm", "orgulho e preconceito", "a","." , "a"});
+        }            
+        tabela.setModel(dados);
+    }
+    
     public void preencheTabelaExemplares(JTable tabela, int op){
+        //tenho que fazer uma função para criar a defaultModel depois
         dados = new DefaultTableModel();
         dados.setNumRows(0);
         dados.addColumn("Tipo");
@@ -54,13 +91,16 @@ public class ExemplarController {
         
         switch(op){
             case 0:
-                //integrar com banco de dados
+                //integrar com banco de dados todos
                 break;
             case 1:
-                //integrar com banco de dados
+                //integrar com banco de dados livro
+                break;
+            case 2:
+                //integrar com banco de dados artigo
                 break;
             default:
-                //integrar com banco de dados
+                //
         }
         
         //integrar com banco de dados

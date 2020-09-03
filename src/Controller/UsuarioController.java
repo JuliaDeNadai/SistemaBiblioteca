@@ -8,6 +8,7 @@ package Controller;
 
 import Model.Usuario;
 import java.util.*;
+import javax.swing.JTable;
 
 
 public class UsuarioController {
@@ -19,22 +20,19 @@ public class UsuarioController {
     
     public void adicionaUsuario(Usuario user){
         //integrar com banco de dados
-        preencheTabela(0);
+        
     }
     
     public void alteraUsuario(Usuario user){
         //integrar com banco de dados
-        preencheTabela(0);
     }
     
     public void removeUsuario(int cod){
         //integrar com banco de dados
-        preencheTabela(0);
     }
     
     public void removeUsuario(int cod[]){
         //integrar com banco de dados
-        preencheTabela(0);
     }
     
     public Usuario buscarUsuario(int cod){
@@ -42,16 +40,24 @@ public class UsuarioController {
         return null;
     }
     
-    public void preencheTabela(int op){
+    public void preencheTabela(JTable table){
+       
+    }
+    
+    public void preencheTabela(JTable table, String cod){
+       
+    }
+    
+    public void preencheTabela(JTable table, int op){
         switch(op){
             case 0:
-                //integrar com banco de dados
+                //integrar com banco de dados todos
                 break;
             case 1:
-                //integrar com banco de dados
+                //integrar com banco de dados cliente
                 break;
             default:
-                //integrar com banco de dados
+                //integrar com banco de dados adm
         }
     }
 }

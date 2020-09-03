@@ -7,7 +7,10 @@ package View;
 
 import Controller.ExemplarController;
 import Controller.UsuarioController;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 
 /**
  *
@@ -26,7 +29,8 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         controleUser = new UsuarioController();
         controleExemplar = new ExemplarController();
-        
+        //controleUser.preencheTabela(tabelaClientes);
+        controleExemplar.preencheTabelaExemplares(tabelaExemplar);
     }
 
     /**
@@ -45,8 +49,8 @@ public class Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         PanelUsers = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnNovoEmprestimo = new javax.swing.JButton();
+        btnDev = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BtnNovoUser = new javax.swing.JButton();
         btnRemoveUser = new javax.swing.JButton();
@@ -86,17 +90,17 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Novo Empréstimo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNovoEmprestimo.setText("Novo Empréstimo");
+        btnNovoEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNovoEmprestimoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Realizar Devolução");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnDev.setText("Realizar Devolução");
+        btnDev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnDevActionPerformed(evt);
             }
         });
 
@@ -107,17 +111,17 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                    .addComponent(btnNovoEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDev, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNovoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDev, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(227, Short.MAX_VALUE))
         );
 
@@ -391,24 +395,32 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnNovoEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoEmprestimoActionPerformed
+        JFrame n = new NovoEmprestimo(); 
+        n.setVisible(true);
+        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_btnNovoEmprestimoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevActionPerformed
+        JFrame n = new NovoEmprestimo(1); 
+        n.setVisible(true);
+        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_btnDevActionPerformed
 
     private void BtnNovoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoUserActionPerformed
         JFrame n = new NovoUsuario(); 
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        //quando retornar que usuario foi inserido com sucesso fazer: controleUser.preencheTabela(tabelaClientes);
     }//GEN-LAST:event_BtnNovoUserActionPerformed
 
     private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
         JFrame n = new NovoExemplar(); 
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        //quando retornar que exemplar foi inserido com sucesso fazer: controleExemplar.preencheTabela(tabelaExemplar);
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void btnEditarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUserActionPerformed
@@ -418,6 +430,8 @@ public class Home extends javax.swing.JFrame {
         JFrame n = new NovoUsuario(cod); 
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        //quando retornar que usuario foi editado com sucesso fazer: controleUser.preencheTabela(tabelaClientes);
     }//GEN-LAST:event_btnEditarUserActionPerformed
 
     private void btnEditarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarExemplarActionPerformed
@@ -427,6 +441,8 @@ public class Home extends javax.swing.JFrame {
         JFrame n = new NovoExemplar(cod); 
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        //quando retornar que exemplar foi editado com sucesso fazer: controleExemplar.preencheTabela(tabelaExemplar);
     }//GEN-LAST:event_btnEditarExemplarActionPerformed
 
     private void btnRemoveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveUserActionPerformed
@@ -461,19 +477,19 @@ public class Home extends javax.swing.JFrame {
 
     private void opUserTodosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opUserTodosStateChanged
         if(opUserTodos.isSelected()){
-            controleUser.preencheTabela(0); 
+            controleUser.preencheTabela(tabelaClientes,0); 
         }
     }//GEN-LAST:event_opUserTodosStateChanged
 
     private void opUserCliStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opUserCliStateChanged
         if(opUserCli.isSelected()){
-            controleUser.preencheTabela(1); 
+            controleUser.preencheTabela(tabelaClientes,1); 
         }
     }//GEN-LAST:event_opUserCliStateChanged
 
     private void opUserAdmStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opUserAdmStateChanged
         if(opUserAdm.isSelected()){
-            controleUser.preencheTabela(2); 
+            controleUser.preencheTabela(tabelaClientes,2); 
         }
     }//GEN-LAST:event_opUserAdmStateChanged
 
@@ -495,6 +511,31 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_opExemplarArtStateChanged
 
+    public void mousePressed(MouseEvent mouseEvent) {
+        tabelaClientes =(JTable) mouseEvent.getSource();
+        tabelaExemplar = (JTable) mouseEvent.getSource();
+        Point point = mouseEvent.getPoint();
+        int row = tabelaClientes.rowAtPoint(point);
+        
+        // Duplo cllique na tabela users/clientes
+        if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRow() != -1) {
+            int cod = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+            
+            JFrame n = new NovoUsuario(cod,1); 
+            n.setVisible(true);
+            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        }
+        
+        // Duplo clique na tabela  exemplar
+        if (mouseEvent.getClickCount() == 2 && tabelaExemplar.getSelectedRow() != -1) {
+            int cod = (int) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+            
+            JFrame m = new NovoExemplar(cod,1); 
+            m.setVisible(true);
+            m.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -533,15 +574,15 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnNovoUser;
     private javax.swing.JTabbedPane PanelUsers;
+    private javax.swing.JButton btnDev;
     private javax.swing.JButton btnEditarExemplar;
     private javax.swing.JButton btnEditarUser;
+    private javax.swing.JButton btnNovoEmprestimo;
     private javax.swing.JButton btnNovoExemplar;
     private javax.swing.JButton btnRemoveExemplar;
     private javax.swing.JButton btnRemoveUser;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

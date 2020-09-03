@@ -35,6 +35,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         btnNovoUsuario.setVisible(true);
         btnAltera.setVisible(false);
         tituloLabel.setText("Novo Usuário");
+        setCamposEditable(true);
         
         controleUser = new UsuarioController();
         
@@ -46,7 +47,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         btnNovoUsuario.setVisible(false);
         btnAltera.setVisible(true);
         tituloLabel.setText("Alterar Usuário");
-        
+        setCamposEditable(true);
         
         controleUser = new UsuarioController();
         //ver como ficaria esse retorno com banco de dados
@@ -54,7 +55,36 @@ public class NovoUsuario extends javax.swing.JFrame {
         preencheCampos(user);
         
     }
-    public void preencheCampos(Usuario user){
+    
+    public NovoUsuario(int cod, int n) {
+        initComponents();
+        
+        btnNovoUsuario.setVisible(false);
+        btnAltera.setVisible(false);
+        tituloLabel.setText("Vizualizar Usuário");
+        
+        setCamposEditable(false);
+        
+        //ver como ficaria esse retorno com banco de dados
+        Usuario user = controleUser.buscarUsuario(cod);
+        preencheCampos(user);
+        
+    }
+    
+    
+    public final void setCamposEditable(boolean bol){
+        campoNome.setEditable(bol);
+        campoCPF.setEditable(bol);
+        campoTelefone.setEditable(bol);
+        campoEmail.setEditable(bol);
+        campoCidade.setEditable(bol);
+        campoRua.setEditable(bol);
+        campoNumero.setEditable(bol);
+        campoBairro.setEditable(bol);
+        campoCEP.setEditable(bol);
+    }
+
+    public final void preencheCampos(Usuario user){
         //implementar depois da resposta
     }
     
@@ -72,21 +102,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         dadosUser[7] = campoBairro.getText();
         dadosUser[8] = campoCEP.getText();
         
-        
-        
         try{
-            /*
-            nome = campoNome.getText();
-            cpf = campoCPF.getText();
-            telefone = campoTelefone.getText();
-            email = campoEmail.getText();
-            cidade = campoCidade.getText();
-            rua = campoRua.getText();
-            numero = campoNumero.getText();
-            bairro = campoBairro.getText();
-            cep = campoCEP.getText();
-            */
-            
             Usuario nUser;
             Endereco end;
             Contato contato;
@@ -497,6 +513,7 @@ public class NovoUsuario extends javax.swing.JFrame {
 
     private void btnAlteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlteraActionPerformed
         alterarUsuario();
+        
     }//GEN-LAST:event_btnAlteraActionPerformed
 
     /**

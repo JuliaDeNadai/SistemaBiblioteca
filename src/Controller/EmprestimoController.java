@@ -15,18 +15,12 @@ import java.util.*;
 public class EmprestimoController {
     private LinkedList<Exemplar> emprestimo;
     
-    private void adicionaExemplar(Exemplar ex){
-        emprestimo.add(ex);
+    public void realizaEmprestimo(int codCli, int codEx){
+        
     }
-    private void removeExemplar(Exemplar ex){
-        Exemplar ale;
-	Iterator<Exemplar> it = emprestimo.listIterator();;
-	while(it.hasNext()){
-            ale = it.next();
-            if(ex == ale){
-		emprestimo.remove(ale);
-            }
-        }
+    
+    public void realizaDevolucao(int codCli, int codEx){
+        
     }
     
     
