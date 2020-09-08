@@ -22,7 +22,7 @@ public class NovoExemplar extends javax.swing.JFrame {
     
     public NovoExemplar() {
         initComponents();
-        
+        setResizable(false);
         btnNovoExemplar.setVisible(true);
         btnAlterar.setVisible(false);
         tituloLabel.setText("Novo Exemplar");

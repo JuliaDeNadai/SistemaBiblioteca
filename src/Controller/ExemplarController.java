@@ -39,6 +39,12 @@ public class ExemplarController {
         return null;
     }
     
+    public void filter(JTable table, String query){
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(dados);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(query));
+    }
+    
     public void preencheTabelaExemplaresVazia(JTable tabela){
         dados = new DefaultTableModel();
         dados.setNumRows(0);

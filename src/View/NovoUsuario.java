@@ -31,7 +31,7 @@ public class NovoUsuario extends javax.swing.JFrame {
     
     public NovoUsuario() {
         initComponents();
-        
+        setResizable(false);
         btnNovoUsuario.setVisible(true);
         btnAltera.setVisible(false);
         tituloLabel.setText("Novo Usuário");

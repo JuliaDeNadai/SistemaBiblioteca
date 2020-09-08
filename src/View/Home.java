@@ -31,6 +31,7 @@ public class Home extends javax.swing.JFrame {
         controleExemplar = new ExemplarController();
         //controleUser.preencheTabela(tabelaClientes);
         controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+        
     }
 
     /**
@@ -57,7 +58,7 @@ public class Home extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaClientes = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        pesquisaUsers = new javax.swing.JTextField();
         btnEditarUser = new javax.swing.JButton();
         opUserCli = new javax.swing.JRadioButton();
         opUserAdm = new javax.swing.JRadioButton();
@@ -68,7 +69,7 @@ public class Home extends javax.swing.JFrame {
         btnEditarExemplar = new javax.swing.JButton();
         btnRemoveExemplar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        pesquisaExemplares = new javax.swing.JTextField();
         btnNovoExemplar = new javax.swing.JButton();
         opExemplarTodos = new javax.swing.JRadioButton();
         opExemplarLiv = new javax.swing.JRadioButton();
@@ -154,6 +155,12 @@ public class Home extends javax.swing.JFrame {
 
         jLabel4.setText("Pesquisar:");
 
+        pesquisaUsers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pesquisaUsersKeyReleased(evt);
+            }
+        });
+
         btnEditarUser.setText("Editar Selecionado");
         btnEditarUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +221,7 @@ public class Home extends javax.swing.JFrame {
                         .addGap(76, 76, 76)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -224,7 +231,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
@@ -270,6 +277,12 @@ public class Home extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Pesquisar:");
+
+        pesquisaExemplares.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pesquisaExemplaresKeyReleased(evt);
+            }
+        });
 
         btnNovoExemplar.setText("Cadastrar Novo");
         btnNovoExemplar.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +332,7 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pesquisaExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnNovoExemplar)
@@ -335,7 +348,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesquisaExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(opExemplarTodos)
                     .addComponent(opExemplarLiv)
                     .addComponent(opExemplarArt))
@@ -511,6 +524,14 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_opExemplarArtStateChanged
 
+    private void pesquisaUsersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pesquisaUsersKeyReleased
+        controleUser.filter(tabelaClientes, pesquisaUsers.getText());
+    }//GEN-LAST:event_pesquisaUsersKeyReleased
+
+    private void pesquisaExemplaresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pesquisaExemplaresKeyReleased
+        controleExemplar.filter(tabelaExemplar, pesquisaExemplares.getText());
+    }//GEN-LAST:event_pesquisaExemplaresKeyReleased
+
     public void mousePressed(MouseEvent mouseEvent) {
         tabelaClientes =(JTable) mouseEvent.getSource();
         tabelaExemplar = (JTable) mouseEvent.getSource();
@@ -594,14 +615,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JRadioButton opExemplarArt;
     private javax.swing.JRadioButton opExemplarLiv;
     private javax.swing.JRadioButton opExemplarTodos;
     private javax.swing.JRadioButton opUserAdm;
     private javax.swing.JRadioButton opUserCli;
     private javax.swing.JRadioButton opUserTodos;
+    private javax.swing.JTextField pesquisaExemplares;
+    private javax.swing.JTextField pesquisaUsers;
     private javax.swing.JTable tabelaClientes;
     private javax.swing.JTable tabelaExemplar;
     // End of variables declaration//GEN-END:variables

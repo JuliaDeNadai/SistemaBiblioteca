@@ -29,7 +29,7 @@ public class NovoEmprestimo extends javax.swing.JFrame {
     public NovoEmprestimo() {
         initComponents();
         comum();
-                
+        setResizable(false);
         jLabel2.setVisible(true);
         fieldExemplares.setVisible(true);
         btnSubmit.setText("REALIZAR EMPRÉSTIMO.");

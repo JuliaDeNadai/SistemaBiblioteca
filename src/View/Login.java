@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.UsuarioController;
 import java.awt.Frame;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -19,18 +20,24 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    UsuarioController controleUser;
     public Login() {
         initComponents();
+        controleUser = new UsuarioController();
     }
     
     public void realizarLogin(String user, String passwrd){
         try{
             if(user.isEmpty() || passwrd.isEmpty() ) throw new Exception("Campos vazios");
             
+            controleUser.realizaLogin(user, passwrd);
+            
+            
             if(user.equals("admin") && passwrd.equals("admin")){
                 
                 Home home = new Home();
                 home.setVisible(true);
+                home.setResizable(false);
                 dispose();
             }else{
                 //invalidLabel.setText("Usuário ou senha inválidos");
