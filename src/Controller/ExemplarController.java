@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Exemplar;
+import java.sql.ResultSet;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -45,74 +46,32 @@ public class ExemplarController {
         tr.setRowFilter(RowFilter.regexFilter(query));
     }
     
-    public void preencheTabelaExemplaresVazia(JTable tabela){
-        dados = new DefaultTableModel();
-        dados.setNumRows(0);
-        dados.addColumn("Tipo");
-        dados.addColumn("Título");
-        dados.addColumn("Autor");
-        dados.addColumn("Ano");
-        dados.addColumn("Editora");
-        dados.addColumn("Edição");
-        dados.addColumn("Instituição");
-        dados.addColumn("Departamento");
-        dados.addColumn("Qntd");
-                    
-        tabela.setModel(dados);
-    }
     
     public void preencheTabelaExemplares(JTable tabela){
+        ResultSet result = null;
         dados = new DefaultTableModel();
-        dados.setNumRows(0);
-        dados.addColumn("Tipo");
-        dados.addColumn("Título");
-        dados.addColumn("Autor");
-        dados.addColumn("Ano");
-        dados.addColumn("Editora");
-        dados.addColumn("Edição");
-        dados.addColumn("Instituição");
-        dados.addColumn("Departamento");
-        dados.addColumn("Qntd");
+         
         
-        //integrar com banco de dados
-        for (int i =0; i<2; i++){
-            dados.addRow(new Object[]{"adm", "orgulho e preconceito", "a","." , "a"});
-        }            
-        tabela.setModel(dados);
+        try{
+            
+            dados.setNumRows(0);
+            dados.addColumn("ID");
+            dados.addColumn("Título");
+            dados.addColumn("Autor");
+            dados.addColumn("Tipo");
+            
+            /*result = user.getUsuarios();
+            
+            while(result.next()){
+                dados.addRow(new Object[]{result.getInt(1), result.getString(2), result.getString(10), result.getString(10)});
+            }*/
+            
+            
+            tabela.setModel(dados);
+            
+        }catch(Exception err){
+            
+        }
     }
     
-    public void preencheTabelaExemplares(JTable tabela, int op){
-        //tenho que fazer uma função para criar a defaultModel depois
-        dados = new DefaultTableModel();
-        dados.setNumRows(0);
-        dados.addColumn("Tipo");
-        dados.addColumn("Título");
-        dados.addColumn("Autor");
-        dados.addColumn("Ano");
-        dados.addColumn("Editora");
-        dados.addColumn("Edição");
-        dados.addColumn("Instituição");
-        dados.addColumn("Departamento");
-        dados.addColumn("Qntd");
-        
-        switch(op){
-            case 0:
-                //integrar com banco de dados todos
-                break;
-            case 1:
-                //integrar com banco de dados livro
-                break;
-            case 2:
-                //integrar com banco de dados artigo
-                break;
-            default:
-                //
-        }
-        
-        //integrar com banco de dados
-        /*for () 
-            dados.addRow(new Object[]{e.getKey().getTipo(), e.getKey().getTitulo(), e.getKey().getAutor(), e.getKey().getAno(),e.getValue()});
-        */            
-        tabela.setModel(dados);
-    }
 }

@@ -1,5 +1,9 @@
 package Model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Exemplar {
 	protected int cod;
 	protected String titulo;
@@ -15,6 +19,8 @@ public class Exemplar {
             this.ano = ano;
             this.tipo = tipo;
         }
+        
+        
 
 	public int getCod() {
             return cod;
