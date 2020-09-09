@@ -29,7 +29,7 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         controleUser = new UsuarioController();
         controleExemplar = new ExemplarController();
-        //controleUser.preencheTabela(tabelaClientes);
+        controleUser.preencheTabela(tabelaClientes);
         controleExemplar.preencheTabelaExemplares(tabelaExemplar);
         
     }
@@ -63,6 +63,7 @@ public class Home extends javax.swing.JFrame {
         opUserCli = new javax.swing.JRadioButton();
         opUserAdm = new javax.swing.JRadioButton();
         opUserTodos = new javax.swing.JRadioButton();
+        btnVerUser = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabelaExemplar = new javax.swing.JTable();
@@ -74,6 +75,7 @@ public class Home extends javax.swing.JFrame {
         opExemplarTodos = new javax.swing.JRadioButton();
         opExemplarLiv = new javax.swing.JRadioButton();
         opExemplarArt = new javax.swing.JRadioButton();
+        btnVerExemplar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -113,7 +115,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNovoEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDev, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                    .addComponent(btnDev, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -198,6 +200,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        btnVerUser.setText("Ver Selecionado");
+        btnVerUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -208,9 +217,11 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(BtnNovoUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(btnEditarUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoveUser))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(opUserTodos)
@@ -218,7 +229,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(opUserCli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(opUserAdm)
-                        .addGap(76, 76, 76)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -227,25 +238,22 @@ public class Home extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(opUserCli)
-                            .addComponent(opUserAdm)
-                            .addComponent(opUserTodos))))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(opUserCli)
+                        .addComponent(opUserAdm)
+                        .addComponent(opUserTodos)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarUser)
                     .addComponent(btnRemoveUser)
-                    .addComponent(BtnNovoUser))
+                    .addComponent(BtnNovoUser)
+                    .addComponent(btnVerUser))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -292,6 +300,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         buttonGroup2.add(opExemplarTodos);
+        opExemplarTodos.setSelected(true);
         opExemplarTodos.setText("Todos");
         opExemplarTodos.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -315,6 +324,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        btnVerExemplar.setText("Ver Selecionado");
+        btnVerExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerExemplarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -322,7 +338,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(opExemplarTodos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,11 +350,12 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pesquisaExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnNovoExemplar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditarExemplar)
-                        .addGap(91, 91, 91)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerExemplar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoveExemplar)))
                 .addContainerGap())
         );
@@ -358,7 +375,8 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarExemplar)
                     .addComponent(btnRemoveExemplar)
-                    .addComponent(btnNovoExemplar))
+                    .addComponent(btnNovoExemplar)
+                    .addComponent(btnVerExemplar))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -372,13 +390,10 @@ public class Home extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(10, 10, 10)))
+                .addGap(413, 413, 413)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(PanelUsers)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,9 +409,7 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,37 +503,37 @@ public class Home extends javax.swing.JFrame {
 
     private void opUserTodosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opUserTodosStateChanged
         if(opUserTodos.isSelected()){
-            controleUser.preencheTabela(tabelaClientes,0); 
+            controleUser.filter(tabelaClientes, "");
         }
     }//GEN-LAST:event_opUserTodosStateChanged
 
     private void opUserCliStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opUserCliStateChanged
         if(opUserCli.isSelected()){
-            controleUser.preencheTabela(tabelaClientes,1); 
+            controleUser.filter(tabelaClientes, "Cliente");
         }
     }//GEN-LAST:event_opUserCliStateChanged
 
     private void opUserAdmStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opUserAdmStateChanged
         if(opUserAdm.isSelected()){
-            controleUser.preencheTabela(tabelaClientes,2); 
+            controleUser.filter(tabelaClientes, "Administrador");
         }
     }//GEN-LAST:event_opUserAdmStateChanged
 
     private void opExemplarTodosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opExemplarTodosStateChanged
         if(opExemplarTodos.isSelected()){
-            controleExemplar.preencheTabelaExemplares(tabelaExemplar,0); 
+            controleExemplar.filter(tabelaExemplar, "");
         }
     }//GEN-LAST:event_opExemplarTodosStateChanged
 
     private void opExemplarLivStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opExemplarLivStateChanged
         if(opExemplarLiv.isSelected()){
-            controleExemplar.preencheTabelaExemplares(tabelaExemplar,1); 
+            controleExemplar.filter(tabelaExemplar, "Livro");
         }
     }//GEN-LAST:event_opExemplarLivStateChanged
 
     private void opExemplarArtStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opExemplarArtStateChanged
         if(opExemplarArt.isSelected()){
-            controleExemplar.preencheTabelaExemplares(tabelaExemplar,2); 
+            controleExemplar.filter(tabelaExemplar, "Artigo"); 
         }
     }//GEN-LAST:event_opExemplarArtStateChanged
 
@@ -531,6 +544,22 @@ public class Home extends javax.swing.JFrame {
     private void pesquisaExemplaresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pesquisaExemplaresKeyReleased
         controleExemplar.filter(tabelaExemplar, pesquisaExemplares.getText());
     }//GEN-LAST:event_pesquisaExemplaresKeyReleased
+
+    private void btnVerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUserActionPerformed
+            int cod = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+            
+            JFrame n = new NovoUsuario(cod,1); 
+            n.setVisible(true);
+            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_btnVerUserActionPerformed
+
+    private void btnVerExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerExemplarActionPerformed
+            int cod = (int) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+
+            JFrame n = new NovoExemplar(cod,1); 
+            n.setVisible(true);
+            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_btnVerExemplarActionPerformed
 
     public void mousePressed(MouseEvent mouseEvent) {
         tabelaClientes =(JTable) mouseEvent.getSource();
@@ -602,6 +631,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnNovoExemplar;
     private javax.swing.JButton btnRemoveExemplar;
     private javax.swing.JButton btnRemoveUser;
+    private javax.swing.JButton btnVerExemplar;
+    private javax.swing.JButton btnVerUser;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;

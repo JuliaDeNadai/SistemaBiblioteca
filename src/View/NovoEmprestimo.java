@@ -47,7 +47,7 @@ public class NovoEmprestimo extends javax.swing.JFrame {
         btnSubmit.setText("REALIZAR DEVOLUÇÃO.");
         tituloLabel.setText("Nova Devolução");
         
-        controleEx.preencheTabelaExemplaresVazia(tabelaExemplares);
+        controleEx.preencheTabelaExemplares(tabelaExemplares);
     }
 
     public void comum(){
@@ -189,7 +189,8 @@ public class NovoEmprestimo extends javax.swing.JFrame {
         if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRow() != -1) {
             int cod = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
             
-            controleUser.preencheTabela(tabelaClientes, String.valueOf(cod));
+            controleUser.filter(tabelaClientes, String.valueOf(cod));
+            //controleUser.preencheTabela(tabelaClientes, String.valueOf(cod));
         }
         
     }
