@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.ExemplarController;
 import Model.*;
 import javax.swing.JOptionPane;
 
@@ -17,38 +18,59 @@ public class NovoExemplar extends javax.swing.JFrame {
     /**
      * Creates new form NovoExemplar
      */
-    public NovoExemplar(int acao) {
+    ExemplarController controleExemplar;
+    
+    public NovoExemplar() {
         initComponents();
-        //acao = 0: adicionar
-        //acao = 1: alterar
+        setResizable(false);
+        btnNovoExemplar.setVisible(true);
+        btnAlterar.setVisible(false);
+        tituloLabel.setText("Novo Exemplar");
+        setCamposEditable(true);
+    }
+    
+    public NovoExemplar(int cod) {
+        initComponents();
         
-        if(acao == 1){
-            btnNovoExemplar.setVisible(false);
-            btnAlterar.setVisible(true);
-            tituloLabel.setText("Alterar Exemplar");
-        }else{
-            btnNovoExemplar.setVisible(true);
-            btnAlterar.setVisible(false);
-            tituloLabel.setText("Novo Exemplar");
-        }
-    }
-    
-    public boolean verificaString(String str){
-        for(int i = 0; i< str.length(); i++){
-            if(!Character.isLetter(str.charAt(i))){ return false;}
-        }
-        return true;
-    }
-    
-    public boolean verificaInteiro(String str){
-        for(int i = 0; i< str.length(); i++){
-            if(!Character.isDigit(str.charAt(i))){ return false;}
-        }
-        return true;
-    }
-    
-    public void cadastrarExemplar(){
+        btnNovoExemplar.setVisible(false);
+        btnAlterar.setVisible(true);
+        tituloLabel.setText("Alterar Exemplar");
+        setCamposEditable(true);
         
+        controleExemplar = new ExemplarController();
+        //ver como ficaria esse retorno com banco de dados
+        Exemplar ex = controleExemplar.buscarExemplar(cod);
+        preencheCampos(ex);
+        
+    }
+    
+    public NovoExemplar(int cod,int n) {
+        initComponents();
+        
+        btnNovoExemplar.setVisible(false);
+        btnAlterar.setVisible(true);
+        tituloLabel.setText("Alterar Exemplar");
+        setCamposEditable(false);
+        
+        
+        controleExemplar = new ExemplarController();
+        //ver como ficaria esse retorno com banco de dados
+        Exemplar ex = controleExemplar.buscarExemplar(cod);
+        preencheCampos(ex);
+        
+    }
+    
+    public final void setCamposEditable(boolean bol){
+        campoTitulo.setEditable(bol);
+        campoAutor.setEditable(bol);
+        campoTitulo.setEditable(bol);
+        campoAutor.setEditable(bol);
+        campoAno.setEditable(bol);
+        campoQntd.setEditable(bol);
+        //buttonGroup1.getSelection().
+    }
+    
+    public Exemplar verificacoes(){
         try{
             Exemplar ex;
             String[] dadosCampo = new String[6];
@@ -86,10 +108,36 @@ public class NovoExemplar extends javax.swing.JFrame {
                 if(!verificaString(instituicao) || !verificaString(departamento)){ throw new Exception("Valores inválidos.");}
                 
                 ex = new Artigo(instituicao, departamento, titulo, autor, ano);
+                
             }
+            return ex;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        
+        return null;
+    }
+    public void preencheCampos(Exemplar ex){
+        
+    }
+    
+    public boolean verificaString(String str){
+        for(int i = 0; i< str.length(); i++){
+            if(!Character.isLetter(str.charAt(i))){ return false;}
+        }
+        return true;
+    }
+    
+    public boolean verificaInteiro(String str){
+        for(int i = 0; i< str.length(); i++){
+            if(!Character.isDigit(str.charAt(i))){ return false;}
+        }
+        return true;
+    }
+    
+    public void cadastrarExemplar(){
+        Exemplar ex = verificacoes();
+        controleExemplar.adicionaExemplar(ex);
         
     }
     
@@ -108,7 +156,8 @@ public class NovoExemplar extends javax.swing.JFrame {
     }
     
     public void alterarExemplar(){
-        
+        Exemplar ex = verificacoes();
+        controleExemplar.alteraExemplar(ex);
     }
 
     
