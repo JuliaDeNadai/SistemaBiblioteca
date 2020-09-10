@@ -239,13 +239,14 @@ public class Home extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(opUserCli)
                         .addComponent(opUserAdm)
-                        .addComponent(opUserTodos)))
+                        .addComponent(opUserTodos))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pesquisaUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -451,7 +452,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnEditarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUserActionPerformed
         int linha = tabelaClientes.getSelectedRow();
-        int cod = (int) tabelaClientes.getValueAt(linha, 0); //codigo
+        String cod = (String) tabelaClientes.getValueAt(linha, 0); //codigo
         
         JFrame n = new NovoUsuario(cod); 
         n.setVisible(true);
@@ -474,18 +475,14 @@ public class Home extends javax.swing.JFrame {
     private void btnRemoveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveUserActionPerformed
         try{
             int linha = tabelaClientes.getSelectedRow();
-            int cod = (int) tabelaClientes.getValueAt(linha, 0); //codigo
-            if(linha == 0){  throw new Exception("Nenhuma linha selecionada.");    }
-            if(linha > 1){  
-                int codV[] = new int[linha];
-                for(int i=0; i<linha; i++){
-                    codV[i] = (int) tabelaClientes.getValueAt(linha, 0);
-                }
-                controleUser.removeUsuario(codV);   
-            }
+            int l = tabelaClientes.getSelectedRowCount();
+            String cod = (String) tabelaClientes.getValueAt(linha, 0); //codigo
+            if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+            if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+            System.out.printf("id: %s", cod);
             controleUser.removeUsuario(cod);
         }catch(Exception err){
-            
+            System.out.println("deu erro caralhow "+err);
         }
         
     }//GEN-LAST:event_btnRemoveUserActionPerformed
@@ -546,7 +543,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_pesquisaExemplaresKeyReleased
 
     private void btnVerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUserActionPerformed
-            int cod = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+            String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
             
             JFrame n = new NovoUsuario(cod,1); 
             n.setVisible(true);
@@ -569,7 +566,7 @@ public class Home extends javax.swing.JFrame {
         
         // Duplo cllique na tabela users/clientes
         if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRow() != -1) {
-            int cod = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+            String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
             
             JFrame n = new NovoUsuario(cod,1); 
             n.setVisible(true);

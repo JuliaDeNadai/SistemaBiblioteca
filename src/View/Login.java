@@ -5,10 +5,14 @@
  */
 package View;
 
+import Controller.Conexion;
 import Controller.UsuarioController;
 import java.awt.Frame;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -185,7 +189,9 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        Conexion c = new Conexion();
+        c.connect();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
