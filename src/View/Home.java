@@ -473,7 +473,6 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarExemplarActionPerformed
 
     private void btnRemoveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveUserActionPerformed
-
         try{
             int linha = tabelaClientes.getSelectedRow();
             int l = tabelaClientes.getSelectedRowCount();
@@ -545,7 +544,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnVerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUserActionPerformed
             String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
-            System.out.println("cod " +cod);
+            
             JFrame n = new NovoUsuario(cod,1); 
             n.setVisible(true);
             n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
