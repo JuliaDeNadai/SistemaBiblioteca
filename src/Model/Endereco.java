@@ -23,6 +23,10 @@ public class Endereco {
         this.CEP = CEP;
         this.cidade = cidade;
     }
+
+    public Endereco() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
          
          
     public String getRua(){

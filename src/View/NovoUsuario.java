@@ -7,28 +7,14 @@ package View;
 
 import Controller.UsuarioController;
 import Model.Administrador;
+import Model.Cliente;
 import Model.Contato;
 import Model.Endereco;
 import Model.Usuario;
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author Edirlene
- */
 public class NovoUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NovoUsuario
-     */
     UsuarioController controleUser;
-    
-    /**
-     *
-     * @param user
-     */
-   
-    
     public NovoUsuario() {
         initComponents();
         setResizable(false);
@@ -41,7 +27,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         
     }
     
-    public NovoUsuario(int cod) {
+    public NovoUsuario(String cod) {
         initComponents();
         
         btnNovoUsuario.setVisible(false);
@@ -56,9 +42,9 @@ public class NovoUsuario extends javax.swing.JFrame {
         
     }
     
-    public NovoUsuario(int cod, int n) {
+    public NovoUsuario(String cod, int n) {
         initComponents();
-        
+        UsuarioController u = new UsuarioController();
         btnNovoUsuario.setVisible(false);
         btnAltera.setVisible(false);
         tituloLabel.setText("Vizualizar Usuário");
@@ -66,8 +52,12 @@ public class NovoUsuario extends javax.swing.JFrame {
         setCamposEditable(false);
         
         //ver como ficaria esse retorno com banco de dados
-        Usuario user = controleUser.buscarUsuario(cod);
-        preencheCampos(user);
+        try{
+            Usuario user = u.buscarUsuario(cod);
+            //preencheCampos(user);
+        }catch (Exception e){
+            System.err.println("Error10" +e);
+        }
         
     }
     
@@ -82,6 +72,8 @@ public class NovoUsuario extends javax.swing.JFrame {
         campoNumero.setEditable(bol);
         campoBairro.setEditable(bol);
         campoCEP.setEditable(bol);
+        campoUser.setEditable(bol);
+        campoPassword.setEditable(bol);
     }
 
     public final void preencheCampos(Usuario user){
@@ -108,12 +100,12 @@ public class NovoUsuario extends javax.swing.JFrame {
             Contato contato;
             
             if(verificaCamposVazios(dadosUser)){ throw new Exception("Preencha todos os campos."); }
-            if(!verificaInteiro(dadosUser, num)){  throw new Exception("Tipo de dados inválido."); }
+            //if(!verificaInteiro(dadosUser, num)){  throw new Exception("Tipo de dados inválido."); }
             
             if(dadosUser[1].length() != 11) throw new Exception("CPF digitado é inválido.");
             if(dadosUser[8].length() != 8) throw new Exception("CEP digitado é inválido.");
             if(!dadosUser[3].endsWith("@gmail.com")) throw new Exception("Digite um email válido.");
-            if(!verificaString(dadosUser, str)){  throw new Exception("Tipo de dados inválido."); }
+           // if(!verificaString(dadosUser, str)){  throw new Exception("Tipo de dados inválido."); }
             
             tipo = buttonGroup1.getSelection().toString();
             if(tipoAdm.isSelected()){
@@ -127,13 +119,13 @@ public class NovoUsuario extends javax.swing.JFrame {
                 
                 end = new Endereco(dadosUser[5], dadosUser[6], dadosUser[7], dadosUser[8], dadosUser[4]);
                 //String rua, String numero, String bairro, String CEP, String cidade
-                
                 contato = new Contato(dadosUser[2], dadosUser[3]);
-                
                 return nUser = new Administrador(dadosLogin[0], dadosLogin[1], dadosUser[0], dadosUser[1], end, contato);
                 //String user, String password, String nome, String cpf, Endereco end, Contato contato
             }else{
-                //cria cliente
+                end = new Endereco(dadosUser[5], dadosUser[6], dadosUser[7], dadosUser[8], dadosUser[4]);
+                contato = new Contato(dadosUser[2], dadosUser[3]);
+                return nUser = new Cliente(dadosUser[0], dadosUser[1], end, contato);
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -395,12 +387,8 @@ public class NovoUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel13)
                                     .addGap(4, 4, 4))
                                 .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(18, 18, 18))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addGap(18, 18, 18)))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(btnNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))))
                 .addGap(27, 27, 27))
@@ -505,6 +493,7 @@ public class NovoUsuario extends javax.swing.JFrame {
 
     private void btnNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoUsuarioActionPerformed
         cadastrarUsuario();
+        setVisible(false);
     }//GEN-LAST:event_btnNovoUsuarioActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
