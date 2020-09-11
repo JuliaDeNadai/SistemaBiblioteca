@@ -7,10 +7,14 @@ package View;
 
 import Controller.ExemplarController;
 import Controller.UsuarioController;
+import Model.Exemplar;
 import Model.Usuario;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 
@@ -429,7 +433,40 @@ public class Home extends javax.swing.JFrame {
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        //quando retornar que usuario foi inserido com sucesso fazer: controleUser.preencheTabela(tabelaClientes);
+        n.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                controleUser.preencheTabela(tabelaClientes);
+            }
+
+            @Override
+            public void windowOpened(WindowEvent we) {
+               
+            }
+
+            @Override
+            public void windowClosed(WindowEvent we) {
+                
+            }
+
+            @Override
+            public void windowIconified(WindowEvent we) {
+                
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent we) {}
+
+            @Override
+            public void windowActivated(WindowEvent we) {}
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                controleUser.preencheTabela(tabelaClientes);
+            }
+        });
+
     }//GEN-LAST:event_BtnNovoUserActionPerformed
 
     private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
@@ -437,7 +474,43 @@ public class Home extends javax.swing.JFrame {
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        //quando retornar que exemplar foi inserido com sucesso fazer: controleExemplar.preencheTabela(tabelaExemplar);
+       n.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+            }
+
+            @Override
+            public void windowOpened(WindowEvent we) {
+            }
+
+            @Override
+            public void windowClosed(WindowEvent we) {
+                
+            }
+
+            @Override
+            public void windowIconified(WindowEvent we) {
+                
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent we) {
+                
+            }
+
+            @Override
+            public void windowActivated(WindowEvent we) {
+                
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+            }
+        });
+        
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void btnEditarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUserActionPerformed
@@ -455,23 +528,97 @@ public class Home extends javax.swing.JFrame {
             n.setVisible(true);
             n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             
+             n.addWindowListener(new WindowListener() {
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    controleUser.preencheTabela(tabelaClientes);
+                }
+
+                @Override
+                public void windowOpened(WindowEvent we) {
+                   
+                }
+
+                @Override
+                public void windowClosed(WindowEvent we) {
+                }
+
+                @Override
+                public void windowIconified(WindowEvent we) {
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent we) {
+                }
+
+                @Override
+                public void windowActivated(WindowEvent we) {
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent we) {
+                   controleUser.preencheTabela(tabelaClientes);
+                }
+            });
+        
         }catch(Exception err){
-           
+           JOptionPane.showMessageDialog(null,err.getMessage());
         }
-        
-        
-        //quando retornar que usuario foi editado com sucesso fazer: controleUser.preencheTabela(tabelaClientes);
     }//GEN-LAST:event_btnEditarUserActionPerformed
 
     private void btnEditarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarExemplarActionPerformed
-        int linha = tabelaExemplar.getSelectedRow();
-        int cod = (int) tabelaExemplar.getValueAt(linha, 0); //codigo
-        
-        JFrame n = new NovoExemplar(cod); 
-        n.setVisible(true);
-        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        
-        //quando retornar que exemplar foi editado com sucesso fazer: controleExemplar.preencheTabela(tabelaExemplar);
+       
+        try{
+            String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+            int l = tabelaExemplar.getSelectedRowCount();   
+            if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+            if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+            
+            Exemplar ex = new Exemplar();
+            ex = controleExemplar.buscarExemplar(cod);
+            
+            JFrame n = new NovoExemplar(cod); 
+            n.setVisible(true);
+            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+            n.addWindowListener(new WindowListener() {
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+                }
+
+                @Override
+                public void windowOpened(WindowEvent we) {
+                }
+
+                @Override
+                public void windowClosed(WindowEvent we) {
+                }
+
+                @Override
+                public void windowIconified(WindowEvent we) {
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent we) {
+                    
+                }
+
+                @Override
+                public void windowActivated(WindowEvent we) {
+                    
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent we) {
+                    controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+                }
+            });
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null,err.getMessage());
+        }
     }//GEN-LAST:event_btnEditarExemplarActionPerformed
 
     private void btnRemoveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveUserActionPerformed
@@ -483,17 +630,27 @@ public class Home extends javax.swing.JFrame {
             if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
             System.out.printf("id: %s", cod);
             controleUser.removeUsuario(cod);
+            controleUser.preencheTabela(tabelaClientes);
         }catch(Exception err){
-            System.out.println("deu erro caralhow "+err);
+            JOptionPane.showMessageDialog(null,err.getMessage());
         }
         
     }//GEN-LAST:event_btnRemoveUserActionPerformed
 
     private void btnRemoveExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveExemplarActionPerformed
-            int linha = tabelaExemplar.getSelectedRow();
-            int cod = (int) tabelaExemplar.getValueAt(linha, 0); //codigo
-            
-            controleExemplar.removeExemplar(cod);
+              
+            try{
+                
+                int l = tabelaExemplar.getSelectedRowCount();
+                String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+                
+                if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+                if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+                controleExemplar.removeExemplar(cod);
+
+            }catch(Exception err){
+                JOptionPane.showMessageDialog(null,err.getMessage());
+            }
     }//GEN-LAST:event_btnRemoveExemplarActionPerformed
 
     private void opUserTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opUserTodosActionPerformed
@@ -545,19 +702,37 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_pesquisaExemplaresKeyReleased
 
     private void btnVerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUserActionPerformed
-            String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
             
-            JFrame n = new NovoUsuario(cod,1); 
-            n.setVisible(true);
-            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            try{
+                String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+                int l = tabelaClientes.getSelectedRowCount();
+                System.err.println("l: "+l);
+                if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+                if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+                 
+                JFrame n = new NovoUsuario(cod,1); 
+                n.setVisible(true);
+                n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            }catch(Exception err){
+                JOptionPane.showMessageDialog(null,err.getMessage());
+            }
     }//GEN-LAST:event_btnVerUserActionPerformed
 
     private void btnVerExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerExemplarActionPerformed
-            int cod = (int) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+            
+            try{
+                String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+                int l = tabelaExemplar.getSelectedRowCount();
+                if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+                if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
 
-            JFrame n = new NovoExemplar(cod,1); 
-            n.setVisible(true);
-            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                JFrame n = new NovoExemplar(cod,1); 
+                n.setVisible(true);
+                n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            }catch(Exception err){
+                JOptionPane.showMessageDialog(null,err.getMessage());
+            }
+
     }//GEN-LAST:event_btnVerExemplarActionPerformed
 
     public void mousePressed(MouseEvent mouseEvent) {
@@ -567,7 +742,7 @@ public class Home extends javax.swing.JFrame {
         int row = tabelaClientes.rowAtPoint(point);
         
         // Duplo cllique na tabela users/clientes
-        if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRow() != -1) {
+        if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRowCount() != 0) {
             String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
             
             JFrame n = new NovoUsuario(cod,1); 
@@ -576,8 +751,8 @@ public class Home extends javax.swing.JFrame {
         }
         
         // Duplo clique na tabela  exemplar
-        if (mouseEvent.getClickCount() == 2 && tabelaExemplar.getSelectedRow() != -1) {
-            int cod = (int) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+        if (mouseEvent.getClickCount() == 2 && tabelaExemplar.getSelectedRowCount() != 0) {
+            String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
             
             JFrame m = new NovoExemplar(cod,1); 
             m.setVisible(true);

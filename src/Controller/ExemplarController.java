@@ -16,28 +16,48 @@ import javax.swing.table.*;
  * @author Edirlene
  */
 public class ExemplarController {
-    //private List<Exemplar> exemplares;
-    
+    private String[] dadosExemplar;
     private DefaultTableModel dados;
-    private int cont = 0;//??
+    Exemplar ex;
     
     public ExemplarController(){
+        dadosExemplar = new String[8];
+        ex = new Exemplar();
     }
     
     public void adicionaExemplar(Exemplar ex){
-        //integrar com banco de dados   
+        try{
+            ex.inserirExemplar(ex);
+        }catch(Exception e){
+            System.err.println("Error..." +e);
+        }
     }
     
-    public void removeExemplar(int cod){
-        //integrar com banco de dados
+    public void removeExemplar(String cod){
+        try{
+            ex.excluirExemplar(cod);
+        }catch(Exception e){
+            System.err.println("Error4" +e);
+        }
     }
     
-    public void alteraExemplar(Exemplar ex){
-        //integrar com banco de dados
+    public void alteraExemplar(Exemplar ex, String cod){
+        try{
+            ex.alterarUsuario(ex, cod);
+        }catch(Exception e){
+            System.err.println("Error13..." +e);
+        }
     }
     
-    public Exemplar buscarExemplar(int cod){
-        return null;
+    public Exemplar buscarExemplar(String cod){
+        Exemplar e = new Exemplar();
+        
+        try{
+            e = ex.searchExemplarByID(cod);       
+        }catch(Exception err){
+            System.err.println("Error7" +err);
+        }
+        return e;
     }
     
     public void filter(JTable table, String query){
@@ -49,9 +69,12 @@ public class ExemplarController {
     
     public void preencheTabelaExemplares(JTable tabela){
         ResultSet result = null;
-        dados = new DefaultTableModel();
+        dados = new DefaultTableModel(){ 
+            public boolean isCellEditable(int rowIndex, int mColIndex){ 
+                return false; 
+            } 
+        };
          
-        
         try{
             
             dados.setNumRows(0);
@@ -60,11 +83,10 @@ public class ExemplarController {
             dados.addColumn("Autor");
             dados.addColumn("Tipo");
             
-            /*result = user.getUsuarios();
-            
+            result = ex.getExemplares();
             while(result.next()){
-                dados.addRow(new Object[]{result.getInt(1), result.getString(2), result.getString(10), result.getString(10)});
-            }*/
+                dados.addRow(new Object[]{result.getString(1), result.getString(3), result.getString(4), result.getString(6)});
+            }
             tabela.setModel(dados);
             
         }catch(Exception err){

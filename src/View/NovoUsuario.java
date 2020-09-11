@@ -136,7 +136,7 @@ public class NovoUsuario extends javax.swing.JFrame {
             Contato contato;
             
             if(verificaCamposVazios(dadosUser)){ throw new Exception("Preencha todos os campos."); }
-            //if(!verificaInteiro(dadosUser, num)){  throw new Exception("Tipo de dados inválido."); }
+            if(!verificaInteiro(dadosUser, num)){  throw new Exception("Tipo de dados inválido."); }
             
             if(dadosUser[1].length() != 11) throw new Exception("CPF digitado é inválido.");
             if(dadosUser[8].length() != 8) throw new Exception("CEP digitado é inválido.");
@@ -202,7 +202,9 @@ public class NovoUsuario extends javax.swing.JFrame {
     
     public boolean verificaInteiro(String[] str, int[] n){
         for(int i = 0; i< n.length; i++){
-            for(int j=0; j< str[n[i]].length();j++){    if(!Character.isDigit(str[n[i]].charAt(j))){ return false;}  }
+            for(int j=0; j< str[n[i]].length();j++){    
+                if(!Character.isDigit(str[n[i]].charAt(j))){ return false;}  
+            }
         }
         return true;
     }
@@ -226,6 +228,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         System.out.println("nome" +user.getNome());
         System.out.println("cod" +getCod());
         controleUser.alteraUsuario(user, getCod());
+        setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -535,6 +538,7 @@ public class NovoUsuario extends javax.swing.JFrame {
 
     private void btnNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoUsuarioActionPerformed
         cadastrarUsuario();
+        dispose();
     }//GEN-LAST:event_btnNovoUsuarioActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -543,7 +547,7 @@ public class NovoUsuario extends javax.swing.JFrame {
 
     private void btnAlteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlteraActionPerformed
         alterarUsuario();
-        
+        dispose();
     }//GEN-LAST:event_btnAlteraActionPerformed
 
     /**
