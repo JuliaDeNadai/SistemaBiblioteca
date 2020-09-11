@@ -20,7 +20,7 @@ public class Usuario {
         /teste teste
         public Usuario(String nome, String cpf, String tipo, Endereco end, Contato contato) {
             this.nome = nome;
-            this.cpf = cpf;
+            this.cpf = cf;
             this.tipo = tipo;
             this.end = end;
             this.contato = contato;
