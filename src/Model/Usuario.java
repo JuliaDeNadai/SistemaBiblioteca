@@ -17,8 +17,7 @@ public class Usuario {
         public Contato contato;
         
         
-        
-
+        /teste teste
         public Usuario(String nome, String cpf, String tipo, Endereco end, Contato contato) {
             this.nome = nome;
             this.cpf = cpf;
