@@ -64,7 +64,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         initComponents();
         ExemplarController ex = new ExemplarController();
         btnNovoExemplar.setVisible(false);
-        btnAlterar.setVisible(true);
+        btnAlterar.setVisible(false);
         tituloLabel.setText("Visualizar Exemplar");
         setCamposEditable(false);
         
