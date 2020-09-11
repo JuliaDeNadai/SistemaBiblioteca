@@ -33,12 +33,9 @@ public class Login extends javax.swing.JFrame {
     public void realizarLogin(String user, String passwrd){
         try{
             if(user.isEmpty() || passwrd.isEmpty() ) throw new Exception("Campos vazios");
+            boolean flag = controleUser.realizaLogin(user, passwrd);
             
-            controleUser.realizaLogin(user, passwrd);
-            
-            
-            if(user.equals("admin") && passwrd.equals("admin")){
-                
+            if((user.equals("admin") && passwrd.equals("admin")) || flag){
                 Home home = new Home();
                 home.setVisible(true);
                 home.setResizable(false);

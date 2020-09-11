@@ -123,6 +123,40 @@ public class Usuario {
 		return null;
 	}
         
+        public boolean searchAdm(String user_login, String password) throws SQLException{
+                Connection con = Conexion.connect();
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try{
+                    stmt = con.prepareStatement("SELECT * FROM USUARIO"); 
+                    result = stmt.executeQuery();
+                    try {
+                        while (result.next()){
+                            String teste = result.getString("USER");
+                            String teste_senha = result.getString("SENHA");
+                            
+                            //System.err.println("user: " +teste);
+                            //System.err.println("senha: " +teste_senha);
+                            if(teste.equals(user_login) && teste_senha.equals(password)){
+                                return true;
+                            }
+                              
+                        }                     
+                    }catch (SQLException e1){
+                        System.err.println("Error11" +e1);
+                    } 
+                }catch(Exception err){
+                     System.err.println("Error9" +err);
+                }finally{
+                    try{
+                        con.close();
+                    }catch(Exception e){
+                         System.err.println("Error10" +e);
+                    }
+                }
+		return false;
+	}
+        
         public void excluirUsuario(String cod)throws SQLException {
                 Connection con = Conexion.connect();
 		PreparedStatement stmt = null;

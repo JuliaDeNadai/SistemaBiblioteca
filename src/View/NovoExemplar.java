@@ -19,6 +19,15 @@ public class NovoExemplar extends javax.swing.JFrame {
      * Creates new form NovoExemplar
      */
     ExemplarController controleExemplar;
+    private String cod;
+    
+    public String getCod() {
+        return cod;
+    }
+
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
     
     public NovoExemplar() {
         initComponents();
@@ -27,9 +36,11 @@ public class NovoExemplar extends javax.swing.JFrame {
         btnAlterar.setVisible(false);
         tituloLabel.setText("Novo Exemplar");
         setCamposEditable(true);
+        
+        controleExemplar = new ExemplarController();
     }
     
-    public NovoExemplar(int cod) {
+    public NovoExemplar(String cod) {
         initComponents();
         
         btnNovoExemplar.setVisible(false);
@@ -38,44 +49,52 @@ public class NovoExemplar extends javax.swing.JFrame {
         setCamposEditable(true);
         
         controleExemplar = new ExemplarController();
-        //ver como ficaria esse retorno com banco de dados
-        Exemplar ex = controleExemplar.buscarExemplar(cod);
-        preencheCampos(ex);
+        try{
+            Exemplar ex = controleExemplar.buscarExemplar(cod);
+            preencheCampos(ex);
+            System.out.println("autor " +ex.getAutor());
+            setCod(cod);
+        }catch (Exception e){
+            System.err.println("Error25" +e);
+        }
         
     }
     
-    public NovoExemplar(int cod,int n) {
+    public NovoExemplar(String cod,int n) {
         initComponents();
-        
+        ExemplarController ex = new ExemplarController();
         btnNovoExemplar.setVisible(false);
-        btnAlterar.setVisible(true);
-        tituloLabel.setText("Alterar Exemplar");
+        btnAlterar.setVisible(false);
+        tituloLabel.setText("Visualizar Exemplar");
         setCamposEditable(false);
         
-        
-        controleExemplar = new ExemplarController();
-        //ver como ficaria esse retorno com banco de dados
-        Exemplar ex = controleExemplar.buscarExemplar(cod);
-        preencheCampos(ex);
+        try{
+            Exemplar exemplar = ex.buscarExemplar(cod);
+            preencheCampos(exemplar);
+        }catch (Exception e){
+            System.err.println("Error10" +e);
+        }
         
     }
     
     public final void setCamposEditable(boolean bol){
         campoTitulo.setEditable(bol);
         campoAutor.setEditable(bol);
-        campoTitulo.setEditable(bol);
-        campoAutor.setEditable(bol);
         campoAno.setEditable(bol);
         campoQntd.setEditable(bol);
+        campoEditora.setEditable(bol);
+        campoEdicao.setEditable(bol);
+        campoInstituicao.setEditable(bol);
+        campoDepartamento.setEditable(bol);
         //buttonGroup1.getSelection().
     }
     
     public Exemplar verificacoes(){
         try{
             Exemplar ex;
-            String[] dadosCampo = new String[6];
-            dadosCampo[0] = campoTitulo.getText();
-            dadosCampo[1] = campoAutor.getText();
+//            String[] dadosCampo = new String[6];
+//            dadosCampo[0] = campoTitulo.getText();
+//            dadosCampo[1] = campoAutor.getText();
             //desisti dessa ideia
             
             String titulo = campoTitulo.getText();
@@ -88,7 +107,7 @@ public class NovoExemplar extends javax.swing.JFrame {
                     throw new Exception("Preencha todos os campos.");
             }
             
-            if(!verificaString(titulo) || !verificaString(autor)){ throw new Exception("Valores inválidos.");}
+            //if(!verificaString(titulo) || !verificaString(autor)){ throw new Exception("Valores inválidos.");}
             if(!verificaInteiro(ano) || ano.length() != 4){  throw new Exception("Campo 'Ano' inválido.");    }
             if(!verificaInteiro(qntd) || Integer.valueOf(qntd)< 1 || Integer.valueOf(qntd) > 20 ){  throw new Exception("Campo 'Qntd' inválido.");    }
             
@@ -97,7 +116,7 @@ public class NovoExemplar extends javax.swing.JFrame {
                 String edicao = campoEdicao.getText();
                 
                 if(editora.isEmpty() || edicao.isEmpty()){  throw new Exception("Preencha todos os campos.");   }
-                if(!verificaString(editora) || !verificaString(edicao)){ throw new Exception("Valores inválidos.");}
+                //if(!verificaString(editora) || !verificaString(edicao)){ throw new Exception("Valores inválidos.");}
                 
                 ex = new Livro(editora, edicao, titulo, autor, ano);
 
@@ -105,7 +124,7 @@ public class NovoExemplar extends javax.swing.JFrame {
                 String instituicao = campoInstituicao.getText();
                 String departamento = campoDepartamento.getText();
                 if(instituicao.isEmpty() || departamento.isEmpty()){    throw new Exception("Preencha todos os campos.");   }
-                if(!verificaString(instituicao) || !verificaString(departamento)){ throw new Exception("Valores inválidos.");}
+                //if(!verificaString(instituicao) || !verificaString(departamento)){ throw new Exception("Valores inválidos.");}
                 
                 ex = new Artigo(instituicao, departamento, titulo, autor, ano);
                 
@@ -117,8 +136,27 @@ public class NovoExemplar extends javax.swing.JFrame {
         
         return null;
     }
-    public void preencheCampos(Exemplar ex){
-        
+    public final void preencheCampos(Exemplar ex){
+            campoTitulo.setText(ex.getTitulo());
+            campoAutor.setText(ex.getAutor());
+            campoAno.setText(ex.getAno());
+            tipoLivro.setEnabled(false);
+            tipoArtigo.setEnabled(false);
+
+            if(ex.getTipo().equals("Livro")){
+                tipoLivro.setSelected(true);
+                campoEditora.setText(((Livro)ex).getEditora());
+                campoEdicao.setText(((Livro)ex).getEdicao());
+                campoInstituicao.setEditable(false);
+                campoDepartamento.setEditable(false);
+            }else{
+                tipoArtigo.setSelected(true);
+                campoEditora.setEditable(false);
+                campoEdicao.setEditable(false);
+                campoInstituicao.setText(((Artigo)ex).getInstituicao());
+                campoDepartamento.setText(((Artigo)ex).getDepartamento());
+            }
+
     }
     
     public boolean verificaString(String str){
@@ -157,7 +195,7 @@ public class NovoExemplar extends javax.swing.JFrame {
     
     public void alterarExemplar(){
         Exemplar ex = verificacoes();
-        controleExemplar.alteraExemplar(ex);
+        controleExemplar.alteraExemplar(ex, getCod());
     }
 
     
@@ -390,15 +428,21 @@ public class NovoExemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_tipoArtigoItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        alteraCampos(1);
+        if(tipoArtigo.isSelected()){    
+            alteraCampos(0);
+        }else{  
+            alteraCampos(1);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
         cadastrarExemplar();
+        dispose();
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         alterarExemplar();
+        dispose();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**

@@ -5,9 +5,8 @@
         <group>
             <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/View/Home.java</file>
             <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/Controller/UsuarioController.java</file>
-            <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/Model/Contato.java</file>
             <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/Model/Usuario.java</file>
-            <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/Controller/Conexion.java</file>
+            <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/View/Login.java</file>
             <file>file:/C:/Users/leoco/Documents/SistemaBiblioteca/src/View/NovoUsuario.java</file>
         </group>
     </open-files>
