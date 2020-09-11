@@ -6,15 +6,15 @@ import java.sql.SQLException;
 
 public class Exemplar {
 	protected int cod;
+         protected boolean status;
 	protected String titulo;
-        protected boolean status;
         protected String autor;
         protected String ano;
         protected String tipo;
 
         public Exemplar(String titulo, String autor, String ano, String tipo) {
-            this.titulo = titulo;
             this.status = false;
+            this.titulo = titulo;
             this.autor = autor;
             this.ano = ano;
             this.tipo = tipo;

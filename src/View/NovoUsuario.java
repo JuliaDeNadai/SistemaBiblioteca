@@ -14,6 +14,16 @@ import Model.Usuario;
 import javax.swing.JOptionPane;
 public class NovoUsuario extends javax.swing.JFrame {
 
+    private String cod;
+
+    public String getCod() {
+        return cod;
+    }
+
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
+    
     UsuarioController controleUser;
     public NovoUsuario() {
         initComponents();
@@ -36,9 +46,15 @@ public class NovoUsuario extends javax.swing.JFrame {
         setCamposEditable(true);
         
         controleUser = new UsuarioController();
-        //ver como ficaria esse retorno com banco de dados
-        Usuario user = controleUser.buscarUsuario(cod);
-        preencheCampos(user);
+        
+        try{
+            Usuario user = controleUser.buscarUsuario(cod);
+            preencheCampos(user);
+            System.out.println("nome" +user.getNome());
+            setCod(cod);
+        }catch (Exception e){
+            System.err.println("Error25" +e);
+        }
         
     }
     
@@ -54,7 +70,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         //ver como ficaria esse retorno com banco de dados
         try{
             Usuario user = u.buscarUsuario(cod);
-            //preencheCampos(user);
+            preencheCampos(user);
         }catch (Exception e){
             System.err.println("Error10" +e);
         }
@@ -77,7 +93,27 @@ public class NovoUsuario extends javax.swing.JFrame {
     }
 
     public final void preencheCampos(Usuario user){
-        //implementar depois da resposta
+        campoNome.setText(user.getNome());
+        campoCPF.setText(user.getCPF());
+        campoTelefone.setText(user.contato.getTelefone());
+        campoEmail.setText(user.contato.getEmail());
+        campoCidade.setText(user.end.getCidade());
+        campoRua.setText(user.end.getRua());
+        campoNumero.setText(user.end.getNumero());
+        campoBairro.setText(user.end.getBairro());
+        campoCEP.setText(user.end.getCEP());
+        tipoAdm.setEnabled(false);
+        tipoCliente.setEnabled(false);
+        if(user.getTipo().equals("Administrador")){
+            tipoAdm.setSelected(true);
+            campoUser.setText(((Administrador)user).getUser());
+            campoPassword.setText(((Administrador)user).getPassword());
+        }else{
+            tipoCliente.setSelected(true);
+            campoUser.setEditable(false);
+            campoPassword.setEditable(false);
+
+        }
     }
     
     public Usuario verificacoes(){
@@ -187,7 +223,9 @@ public class NovoUsuario extends javax.swing.JFrame {
     
     public void alterarUsuario(){
         Usuario user = verificacoes();
-        controleUser.alteraUsuario(user);
+        System.out.println("nome" +user.getNome());
+        System.out.println("cod" +getCod());
+        controleUser.alteraUsuario(user, getCod());
     }
     /**
      * This method is called from within the constructor to initialize the form.
