@@ -9,7 +9,10 @@ import Controller.ExemplarController;
 import Controller.UsuarioController;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -25,7 +28,7 @@ public class Home extends javax.swing.JFrame {
     UsuarioController controleUser;
     ExemplarController controleExemplar;
     
-    public Home() {
+    public Home(){
         initComponents();
         controleUser = new UsuarioController();
         controleExemplar = new ExemplarController();
@@ -439,7 +442,44 @@ public class Home extends javax.swing.JFrame {
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        //quando retornar que usuario foi inserido com sucesso fazer: controleUser.preencheTabela(tabelaClientes);
+        n.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                controleUser.preencheTabela(tabelaClientes);
+            }
+
+            @Override
+            public void windowOpened(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosed(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowIconified(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowActivated(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+
     }//GEN-LAST:event_BtnNovoUserActionPerformed
 
     private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
@@ -447,51 +487,183 @@ public class Home extends javax.swing.JFrame {
         n.setVisible(true);
         n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        //quando retornar que exemplar foi inserido com sucesso fazer: controleExemplar.preencheTabela(tabelaExemplar);
+        n.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+            }
+
+            @Override
+            public void windowOpened(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosed(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowIconified(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowActivated(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void btnEditarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUserActionPerformed
-        int linha = tabelaClientes.getSelectedRow();
-        String cod = (String) tabelaClientes.getValueAt(linha, 0); //codigo
+        String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+        int l = tabelaClientes.getSelectedRowCount();   
+        try{
+            if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+            if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+            
+            JFrame n = new NovoUsuario(cod); 
+            n.setVisible(true);
+            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+            n.addWindowListener(new WindowListener() {
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    controleUser.preencheTabela(tabelaClientes);
+                }
+
+                @Override
+                public void windowOpened(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowClosed(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowIconified(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowActivated(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null,err.getMessage());
+        }
         
-        JFrame n = new NovoUsuario(cod); 
-        n.setVisible(true);
-        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        //quando retornar que usuario foi editado com sucesso fazer: controleUser.preencheTabela(tabelaClientes);
     }//GEN-LAST:event_btnEditarUserActionPerformed
 
     private void btnEditarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarExemplarActionPerformed
-        int linha = tabelaExemplar.getSelectedRow();
-        int cod = (int) tabelaExemplar.getValueAt(linha, 0); //codigo
+        String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+        int l = tabelaExemplar.getSelectedRowCount();   
+        try{
+            if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+            if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+            
+            
+            JFrame n = new NovoExemplar(cod); 
+            n.setVisible(true);
+            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+            n.addWindowListener(new WindowListener() {
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+                }
+
+                @Override
+                public void windowOpened(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowClosed(WindowEvent we) {
+                    controleExemplar.preencheTabelaExemplares(tabelaExemplar);
+                }
+
+                @Override
+                public void windowIconified(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowActivated(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent we) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null,err.getMessage());
+        }
         
-        JFrame n = new NovoExemplar(cod); 
-        n.setVisible(true);
-        n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        
-        //quando retornar que exemplar foi editado com sucesso fazer: controleExemplar.preencheTabela(tabelaExemplar);
     }//GEN-LAST:event_btnEditarExemplarActionPerformed
 
     private void btnRemoveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveUserActionPerformed
+        String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+        int l = tabelaClientes.getSelectedRowCount();  
+        
         try{
-            int linha = tabelaClientes.getSelectedRow();
-            int l = tabelaClientes.getSelectedRowCount();
-            String cod = (String) tabelaClientes.getValueAt(linha, 0); //codigo
             if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
             if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
-            System.out.printf("id: %s", cod);
             controleUser.removeUsuario(cod);
         }catch(Exception err){
-            System.out.println("deu erro caralhow "+err);
+            JOptionPane.showMessageDialog(null,err.getMessage());
         }
         
     }//GEN-LAST:event_btnRemoveUserActionPerformed
 
     private void btnRemoveExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveExemplarActionPerformed
-            int linha = tabelaExemplar.getSelectedRow();
-            int cod = (int) tabelaExemplar.getValueAt(linha, 0); //codigo
+            String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+            int l = tabelaExemplar.getSelectedRowCount();   
+            try{
+                if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+                if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+
+                controleExemplar.removeExemplar(cod);
+
+            }catch(Exception err){
+                JOptionPane.showMessageDialog(null,err.getMessage());
+            }
             
-            controleExemplar.removeExemplar(cod);
     }//GEN-LAST:event_btnRemoveExemplarActionPerformed
 
     private void opUserTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opUserTodosActionPerformed
@@ -544,18 +716,35 @@ public class Home extends javax.swing.JFrame {
 
     private void btnVerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUserActionPerformed
             String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
+            int l = tabelaClientes.getSelectedRowCount();
+            try{
+                if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+                if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
+
+                JFrame n = new NovoUsuario(cod,1); 
+                n.setVisible(true);
+                n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            }catch(Exception err){
+                JOptionPane.showMessageDialog(null,err.getMessage());
+            }
             
-            JFrame n = new NovoUsuario(cod,1); 
-            n.setVisible(true);
-            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_btnVerUserActionPerformed
 
     private void btnVerExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerExemplarActionPerformed
-            int cod = (int) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+            String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+            int l = tabelaExemplar.getSelectedRowCount();
+            try{
+                if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
+                if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
 
-            JFrame n = new NovoExemplar(cod,1); 
-            n.setVisible(true);
-            n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                JFrame n = new NovoExemplar(cod,1); 
+                n.setVisible(true);
+                n.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            }catch(Exception err){
+                JOptionPane.showMessageDialog(null,err.getMessage());
+            }
+
+            
     }//GEN-LAST:event_btnVerExemplarActionPerformed
 
     public void mousePressed(MouseEvent mouseEvent) {
@@ -565,7 +754,7 @@ public class Home extends javax.swing.JFrame {
         int row = tabelaClientes.rowAtPoint(point);
         
         // Duplo cllique na tabela users/clientes
-        if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRow() != -1) {
+        if (mouseEvent.getClickCount() == 2 && tabelaClientes.getSelectedRowCount() != 0) {
             String cod = (String) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0);
             
             JFrame n = new NovoUsuario(cod,1); 
@@ -574,8 +763,8 @@ public class Home extends javax.swing.JFrame {
         }
         
         // Duplo clique na tabela  exemplar
-        if (mouseEvent.getClickCount() == 2 && tabelaExemplar.getSelectedRow() != -1) {
-            int cod = (int) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
+        if (mouseEvent.getClickCount() == 2 && tabelaExemplar.getSelectedRowCount() != 0) {
+            String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
             
             JFrame m = new NovoExemplar(cod,1); 
             m.setVisible(true);

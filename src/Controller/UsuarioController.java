@@ -100,7 +100,6 @@ public class UsuarioController {
 
             result = user.getUsuarios();
             while(result.next()){
-                //System.out.println("Passou");
                 dados.addRow(new Object[]{result.getString(1), result.getString(2), result.getString(11)});
             }
             

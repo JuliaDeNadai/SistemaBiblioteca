@@ -29,7 +29,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         setCamposEditable(true);
     }
     
-    public NovoExemplar(int cod) {
+    public NovoExemplar(String cod) {
         initComponents();
         
         btnNovoExemplar.setVisible(false);
@@ -44,7 +44,7 @@ public class NovoExemplar extends javax.swing.JFrame {
         
     }
     
-    public NovoExemplar(int cod,int n) {
+    public NovoExemplar(String cod,int n) {
         initComponents();
         
         btnNovoExemplar.setVisible(false);

@@ -36,7 +36,6 @@ public class NovoUsuario extends javax.swing.JFrame {
         setCamposEditable(true);
         
         controleUser = new UsuarioController();
-        //ver como ficaria esse retorno com banco de dados
         Usuario user = controleUser.buscarUsuario(cod);
         preencheCampos(user);
         
@@ -51,7 +50,7 @@ public class NovoUsuario extends javax.swing.JFrame {
         
         setCamposEditable(false);
         
-        //ver como ficaria esse retorno com banco de dados
+        
         try{
             Usuario user = u.buscarUsuario(cod);
             //preencheCampos(user);
@@ -77,7 +76,27 @@ public class NovoUsuario extends javax.swing.JFrame {
     }
 
     public final void preencheCampos(Usuario user){
-        //implementar depois da resposta
+        campoNome.setText(user.getNome());
+        campoCPF.setText(user.getCPF());
+        campoTelefone.setText(user.contato.getTelefone());
+        campoEmail.setText(user.contato.getEmail());
+        campoCidade.setText(user.end.getCidade());
+        campoRua.setText(user.end.getRua());
+        campoNumero.setText(user.end.getNumero());
+        campoBairro.setText(user.end.getBairro());
+        campoCEP.setText(user.end.getCEP());
+        tipoAdm.setEnabled(false);
+        tipoCliente.setEnabled(false);
+        if(user.getTipo().equals("Administrador")){
+            tipoAdm.setSelected(true);
+            campoUser.setText(((Administrador)user).getUser());
+            campoPassword.setText(((Administrador)user).getPassword());
+        }else{
+            tipoCliente.setSelected(true);
+            campoUser.setEditable(false);
+            campoPassword.setEditable(false);
+            
+        }
     }
     
     public Usuario verificacoes(){
@@ -232,6 +251,9 @@ public class NovoUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -387,12 +409,8 @@ public class NovoUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel13)
                                     .addGap(4, 4, 4))
                                 .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(18, 18, 18))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addGap(18, 18, 18)))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(btnNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))))
                 .addGap(27, 27, 27))
@@ -507,6 +525,10 @@ public class NovoUsuario extends javax.swing.JFrame {
         alterarUsuario();
         
     }//GEN-LAST:event_btnAlteraActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
