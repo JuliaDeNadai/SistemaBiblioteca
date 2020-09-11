@@ -63,11 +63,9 @@ public class NovoUsuario extends javax.swing.JFrame {
         UsuarioController u = new UsuarioController();
         btnNovoUsuario.setVisible(false);
         btnAltera.setVisible(false);
-        tituloLabel.setText("Vizualizar Usuário");
+        tituloLabel.setText("Visualizar Usuário");
         
         setCamposEditable(false);
-        
-        //ver como ficaria esse retorno com banco de dados
         try{
             Usuario user = u.buscarUsuario(cod);
             preencheCampos(user);

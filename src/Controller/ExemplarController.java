@@ -16,12 +16,12 @@ import javax.swing.table.*;
  * @author Edirlene
  */
 public class ExemplarController {
-    private String[] dadosExemplar;
+    private String[] dadosExemplar = new String[8];
     private DefaultTableModel dados;
-    Exemplar ex;
+    private Exemplar ex;
     
     public ExemplarController(){
-        dadosExemplar = new String[8];
+        //dadosExemplar ;
         ex = new Exemplar();
     }
     
@@ -43,7 +43,7 @@ public class ExemplarController {
     
     public void alteraExemplar(Exemplar ex, String cod){
         try{
-            ex.alterarUsuario(ex, cod);
+            ex.alterarExemplar(ex, cod);
         }catch(Exception e){
             System.err.println("Error13..." +e);
         }

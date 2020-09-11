@@ -73,9 +73,15 @@ public class UsuarioController {
         return u;
     }
     
-    public Boolean realizaLogin(String user, String passwrd){
-        //banco de dados
-        return null;
+    public Boolean realizaLogin(String user_login, String password){
+        boolean flag = false;
+        try{
+            flag = user.searchAdm(user_login, password);
+            return flag;
+        }catch(Exception e){
+            System.err.println("ErrorLogin" +e);
+            return false;
+        }
     }
     
     // Implementação da parte de pesquisa

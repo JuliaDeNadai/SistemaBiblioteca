@@ -640,14 +640,12 @@ public class Home extends javax.swing.JFrame {
     private void btnRemoveExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveExemplarActionPerformed
               
             try{
-                
                 int l = tabelaExemplar.getSelectedRowCount();
                 String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
-                
                 if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
                 if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
                 controleExemplar.removeExemplar(cod);
-
+                controleExemplar.preencheTabelaExemplares(tabelaExemplar);
             }catch(Exception err){
                 JOptionPane.showMessageDialog(null,err.getMessage());
             }
@@ -723,6 +721,7 @@ public class Home extends javax.swing.JFrame {
             try{
                 String cod = (String) tabelaExemplar.getValueAt(tabelaExemplar.getSelectedRow(), 0);
                 int l = tabelaExemplar.getSelectedRowCount();
+                System.err.println("l: "+l);
                 if(l == 0){  throw new Exception("Nenhuma linha selecionada.");}
                 if(l > 1){ throw new Exception("Mais de uma linha selecionada.");}
 

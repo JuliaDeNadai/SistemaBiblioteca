@@ -35,7 +35,7 @@ public class Exemplar {
                     if(ex.getTipo().equalsIgnoreCase("Artigo")){
                          st.executeUpdate("INSERT INTO EXEMPLAR (STATUS, TITULO, AUTOR, ANO, TIPO, EDITORA, EDICAO, INSTITUICAO, DEPARTAMENTO) VALUES ('"+ex.getStatus()+"', '"+ex.getTitulo()+"', '"+ex.getAutor()+"', '"+ex.getAno()+"', '"+ex.getTipo()+"',+'-', +'-', '"+((Artigo)ex).getInstituicao()+"', '"+((Artigo)ex).getDepartamento()+"')");
                     }else{
-                         st.executeUpdate("INSERT INTO EXEMPLAR (STATUS, TITULO, AUTOR, ANO, TIPO, EDITORA, EDICAO, INSTITUICAO, DEPARTAMENTO) VALUES ('"+ex.getStatus()+"', '"+ex.getTitulo()+"', '"+ex.getAutor()+"', '"+ex.getAno()+"', '"+ex.getTipo()+"', '" +((Livro)ex).getEditora()+"','" +((Livro)ex).getEdicao()+"-"+"', '"+"-"+"')");
+                         st.executeUpdate("INSERT INTO EXEMPLAR (STATUS, TITULO, AUTOR, ANO, TIPO, EDITORA, EDICAO, INSTITUICAO, DEPARTAMENTO) VALUES ('"+ex.getStatus()+"', '"+ex.getTitulo()+"', '"+ex.getAutor()+"', '"+ex.getAno()+"', '"+ex.getTipo()+"', '" +((Livro)ex).getEditora()+"','"+((Livro)ex).getEdicao()+"', +'-', +'-')");
                     }
                    
                 }catch(Exception e){
@@ -76,7 +76,7 @@ public class Exemplar {
                 Exemplar ex;
                 String[] dadosExemplar = new String[8];
 		try{
-                    stmt = con.prepareStatement("SELECT * FROM EXEMPLAR WHERE id ="+cod); //criar conexão
+                    stmt = con.prepareStatement("SELECT * FROM EXEMPLAR WHERE IDEXEMPLAR ="+cod); //criar conexão
                     result = stmt.executeQuery();
                     try {
                         while (result.next()){
@@ -116,7 +116,7 @@ public class Exemplar {
                 Connection con = Conexion.connect();
 		PreparedStatement stmt = null;
 		try{
-                    stmt = con.prepareStatement("DELETE FROM EXEMPLAR WHERE id="+cod);
+                    stmt = con.prepareStatement("DELETE FROM EXEMPLAR WHERE IDEXEMPLAR="+cod);
                     int i = stmt.executeUpdate();
                     System.out.println("i: "+i);
                 }catch(Exception err){
@@ -130,14 +130,14 @@ public class Exemplar {
                 }
 	}
         
-        public void alterarUsuario (Exemplar ex, String cod) throws SQLException {
+        public void alterarExemplar (Exemplar ex, String cod) throws SQLException {
                 Connection con = Conexion.connect();
                 try{
                     Statement st = con.createStatement();
                     if(ex.getTipo().equalsIgnoreCase("Artigo")){
-                        st.executeUpdate("UPDATE EXEMPLAR SET TITULO= '"+ex.getTitulo()+"', AUTOR = '"+ex.getAutor()+"', ANO =  '"+ex.getAno()+"', TIPO = '"+ex.getTipo()+"', INSTITUICAO = '"+((Artigo)ex).getInstituicao()+"', DEPARTAMENTO = '"+((Artigo)ex).getDepartamento()+"' WHERE ID="+cod);
+                        st.executeUpdate("UPDATE EXEMPLAR SET TITULO= '"+ex.getTitulo()+"', AUTOR = '"+ex.getAutor()+"', ANO =  '"+ex.getAno()+"', TIPO = '"+ex.getTipo()+"', EDITORA = '-', EDICAO = '-', INSTITUICAO = '"+((Artigo)ex).getInstituicao()+"', DEPARTAMENTO = '"+((Artigo)ex).getDepartamento()+"' WHERE IDEXEMPLAR="+cod);
                     }else{
-                        st.executeUpdate("UPDATE EXEMPLAR SET TITULO= '"+ex.getTitulo()+"', AUTOR = '"+ex.getAutor()+"', ANO =  '"+ex.getAno()+"', TIPO = '"+ex.getTipo()+"', EDITORA = '"+((Livro)ex).getEditora()+"', EDICAO = '"+((Livro)ex).getEdicao()+"' WHERE ID="+cod);
+                        st.executeUpdate("UPDATE EXEMPLAR SET TITULO= '"+ex.getTitulo()+"', AUTOR = '"+ex.getAutor()+"', ANO =  '"+ex.getAno()+"', TIPO = '"+ex.getTipo()+"', EDITORA = '"+((Livro)ex).getEditora()+"', EDICAO = '"+((Livro)ex).getEdicao()+"', INSTITUICAO = '-', DEPARTAMENTO = '-'  WHERE IDEXEMPLAR="+cod);
                     }   
                 }catch(Exception e){
                     System.err.println("Error5" +e);
