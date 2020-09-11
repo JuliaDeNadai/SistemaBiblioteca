@@ -65,8 +65,6 @@ public class ExemplarController {
             while(result.next()){
                 dados.addRow(new Object[]{result.getInt(1), result.getString(2), result.getString(10), result.getString(10)});
             }*/
-            
-            
             tabela.setModel(dados);
             
         }catch(Exception err){

@@ -9,15 +9,13 @@ import java.sql.Statement;
 import java.util.*;
 
 public class Usuario {
-	protected int cod;
+	protected String cod;
 	protected String nome;
         protected String cpf;
         protected String tipo;
         public Endereco end;
         public Contato contato;
-        
-        
-        /teste teste
+
         public Usuario(String nome, String cpf, String tipo, Endereco end, Contato contato) {
             this.nome = nome;
             this.cpf = cpf;
@@ -25,6 +23,7 @@ public class Usuario {
             this.end = end;
             this.contato = contato;
         }
+        
         public Usuario(){
             
         }
@@ -72,7 +71,7 @@ public class Usuario {
 		return result;
 	}
         
-        public Usuario searchUserByID(String cod)throws SQLException {
+        public Usuario searchUserByID(String cod) throws SQLException {
                 Connection con = Conexion.connect();
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -121,7 +120,6 @@ public class Usuario {
                          System.err.println("Error10" +e);
                     }
                 }
-		
 		return null;
 	}
         
@@ -143,10 +141,30 @@ public class Usuario {
                 }
 	}
         
-	public int getCod() {
+        public void alterarUsuario (Usuario user, String cod) throws SQLException {
+                Connection con = Conexion.connect();
+                try{
+                    Statement st = con.createStatement();
+                    if(user.getTipo().equalsIgnoreCase("Administrador")){
+                        st.executeUpdate("UPDATE USUARIO SET NOME = '"+user.getNome()+"', CPF = '"+user.getCPF()+"', RUA =  '"+user.end.getRua()+"', NUMERO = '"+user.end.getNumero()+"', BAIRRO = '"+user.end.getBairro()+"', CEP = '"+user.end.getCEP()+"', CIDADE = '"+user.end.getCidade()+"', EMAIL = '"+user.contato.getEmail()+"', TELEFONE = '"+user.contato.getTelefone()+"', TIPO = '"+user.getTipo()+"',USER = '"+((Administrador)user).getUser()+"', SENHA = '"+((Administrador)user).getPassword()+"' WHERE ID="+cod);
+                    }else{
+                         st.executeUpdate("UPDATE USUARIO SET NOME = '"+user.getNome()+"', CPF = '"+user.getCPF()+"', RUA =  '"+user.end.getRua()+"', NUMERO = '"+user.end.getNumero()+"', BAIRRO = '"+user.end.getBairro()+"', CEP = '"+user.end.getCEP()+"', CIDADE = '"+user.end.getCidade()+"', EMAIL = '"+user.contato.getEmail()+"', TELEFONE = '"+user.contato.getTelefone()+"', TIPO = '"+user.getTipo()+"', USER = '-', SENHA = '-' WHERE ID="+cod);
+                    }
+                }catch(Exception e){
+                    System.err.println("Error5" +e);
+                }finally{
+                    try{
+                        con.close();
+                    }catch(SQLException e){
+                        System.err.println("Error6" +e);
+                    }
+                }
+	}
+        
+	public String getCod() {
 		return cod;
 	}
-	public void setCod(int p_cod) {
+	public void setCod(String p_cod) {
 		this.cod = p_cod;
 	}
 	public String getNome() {

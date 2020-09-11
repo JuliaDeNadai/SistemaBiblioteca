@@ -41,8 +41,12 @@ public class UsuarioController {
         }
     }
     
-    public void alteraUsuario(Usuario user){
-        //integrar com banco de dados
+    public void alteraUsuario(Usuario user, String cod){
+        try{
+            user.alterarUsuario(user, cod);
+        }catch(Exception e){
+            System.err.println("Error13..." +e);
+        }
     }
     
     public void removeUsuario(String cod){
